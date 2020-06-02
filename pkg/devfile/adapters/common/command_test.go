@@ -220,13 +220,13 @@ func TestValidateAction(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "Case: valid Exec Command with Group nil",
+			name: "Case: Invalid Exec Command with Group nil",
 			exec: common.Exec{
 				CommandLine: command,
 				Component:   component,
 				WorkingDir:  workDir,
 			},
-			wantErr: false,
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -350,7 +350,7 @@ func TestGetBuildCommand(t *testing.T) {
 		wantErr      bool
 	}{
 		{
-			name:        "Case 1: Default Build Command",
+			name:        "Case: Default Build Command",
 			commandName: emptyString,
 			execCommands: []common.Exec{
 				{
@@ -363,7 +363,7 @@ func TestGetBuildCommand(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name:        "Case 2: Build Command passed through the odo flag",
+			name:        "Case: Build Command passed through the odo flag",
 			commandName: "flagcommand",
 			execCommands: []common.Exec{
 				{
@@ -384,7 +384,7 @@ func TestGetBuildCommand(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name:        "Case 3: Missing Build Command",
+			name:        "Case: Missing Build Command",
 			commandName: "customcommand123",
 			execCommands: []common.Exec{
 				{
@@ -437,7 +437,7 @@ func TestGetRunCommand(t *testing.T) {
 		wantErr      bool
 	}{
 		{
-			name:        "Case 1: Default Run Command",
+			name:        "Case: Default Run Command",
 			commandName: emptyString,
 			execCommands: []common.Exec{
 				{
@@ -450,7 +450,7 @@ func TestGetRunCommand(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name:        "Case 2: Run Command passed through odo flag",
+			name:        "Case: Run Command passed through odo flag",
 			commandName: "flagcommand",
 			execCommands: []common.Exec{
 				{
@@ -471,7 +471,7 @@ func TestGetRunCommand(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name:        "Case 3: Missing Run Command",
+			name:        "Case: Missing Run Command",
 			commandName: "",
 			execCommands: []common.Exec{
 				{
@@ -567,7 +567,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 		wantErr             bool
 	}{
 		{
-			name:             "Case 1: Default Devfile Commands",
+			name:             "Case: Default Devfile Commands",
 			initCommand:      emptyString,
 			buildCommand:     emptyString,
 			runCommand:       emptyString,
@@ -576,7 +576,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 			wantErr:          false,
 		},
 		{
-			name:             "Case 2: Default Init and Build Command, and Provided Run Command",
+			name:             "Case: Default Init and Build Command, and Provided Run Command",
 			initCommand:      emptyString,
 			buildCommand:     emptyString,
 			runCommand:       "customcommand",
@@ -585,7 +585,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 			wantErr:          false,
 		},
 		{
-			name:             "Case 3: Empty Component",
+			name:             "Case: Empty Component",
 			initCommand:      emptyString,
 			buildCommand:     "customcommand",
 			runCommand:       "customcommand",
@@ -594,7 +594,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 			wantErr:          true,
 		},
 		{
-			name:             "Case 4: Provided Wrong Build Command and Provided Run Command",
+			name:             "Case: Provided Wrong Build Command and Provided Run Command",
 			initCommand:      emptyString,
 			buildCommand:     "customcommand123",
 			runCommand:       "customcommand",
@@ -603,7 +603,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 			wantErr:          true,
 		},
 		{
-			name:             "Case 5: Provided Wrong Init Command and Provided Build and Run Command",
+			name:             "Case: Provided Wrong Init Command and Provided Build and Run Command",
 			initCommand:      "customcommand123",
 			buildCommand:     emptyString,
 			runCommand:       "customcommand",
@@ -612,7 +612,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 			wantErr:          true,
 		},
 		{
-			name:         "Case 6: Missing Init and Build Command, and Provided Run Command",
+			name:         "Case: Missing Init and Build Command, and Provided Run Command",
 			initCommand:  emptyString,
 			buildCommand: emptyString,
 			runCommand:   "customcommand",
@@ -628,7 +628,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 			wantErr:          false,
 		},
 		{
-			name:         "Case 7: Missing Init Command with provided Build and Run Command",
+			name:         "Case: Missing Init Command with provided Build and Run Command",
 			initCommand:  emptyString,
 			buildCommand: "build command",
 			runCommand:   "run command",
@@ -651,7 +651,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 			wantErr:            false,
 		},
 		{
-			name:         "Case 8: Missing Build Command with provided Init and Run Command",
+			name:         "Case: Missing Build Command with provided Init and Run Command",
 			initCommand:  "init command",
 			buildCommand: emptyString,
 			runCommand:   "run command",
@@ -673,7 +673,7 @@ func TestValidateAndGetPushDevfileCommands(t *testing.T) {
 			wantErr:          false,
 		},
 		{
-			name:             "Case 9: Optional Init Command with provided Build and Run Command",
+			name:             "Case: Optional Init Command with provided Build and Run Command",
 			initCommand:      "init command",
 			buildCommand:     "build command",
 			runCommand:       "run command",

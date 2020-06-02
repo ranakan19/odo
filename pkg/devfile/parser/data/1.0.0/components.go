@@ -25,8 +25,7 @@ func (d *Devfile100) GetComponents() []common.DevfileComponent {
 
 // GetAliasedComponents returns the slice of DevfileComponent objects that each have an alias
 func (d *Devfile100) GetAliasedComponents() []common.DevfileComponent {
-	// TODO(adi): All components are aliased for V2, this method should be removed from interface
-	// when we remove V1
+	// TODO(adi): we might not need this for V2 as name is a required field now.
 	var comps []common.DevfileComponent
 	for _, v := range d.Components {
 		comps = append(comps, convertV1ComponentToCommon(v))
@@ -204,24 +203,19 @@ func convertV1ProjectToCommon(p Project) common.DevfileProject {
 }
 
 func getGroup(name string) *common.Group {
+	group := common.Group{}
 
 	switch name {
 	case "devrun":
-		return &common.Group{
-			Kind:      common.RunCommandGroupType,
-			IsDefault: true,
-		}
+		group.Kind = common.RunCommandGroupType
+		group.IsDefault = true
 	case "devbuild":
-		return &common.Group{
-			Kind:      common.BuildCommandGroupType,
-			IsDefault: true,
-		}
+		group.Kind = common.BuildCommandGroupType
+		group.IsDefault = true
 	case "devinit":
-		return &common.Group{
-			Kind:      common.InitCommandGroupType,
-			IsDefault: true,
-		}
+		group.Kind = common.InitCommandGroupType
+		group.IsDefault = true
 	}
 
-	return nil
+	return &group
 }
