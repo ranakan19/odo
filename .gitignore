@@ -88,3 +88,6 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+
+.odo/odo-file-index.json
+.odo/env
