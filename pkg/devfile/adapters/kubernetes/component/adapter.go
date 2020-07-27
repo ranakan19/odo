@@ -90,7 +90,7 @@ func (a Adapter) generateBuildContainer(containerName string, dockerfileBytes []
 	//command := []string{"buildah"}
 	//commandArgs := []string{"bud"}
 	command := []string{}
-	commandArgs := []string{"--context=git://github.com/ranakan19/golang-ex.git",
+	commandArgs := []string{"--context=git://github.com/ranakan19/nodejs-kaniko-test.git",
 		"--destination=" + imageTag,
 		"--skip-tls-verify"}
 
